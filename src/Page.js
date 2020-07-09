@@ -17,6 +17,11 @@ import SideDrawer from './SideDrawer'
 import { Route, Switch, Link, BrowserRouter as Router } from 'react-router-dom'
 import HomePage from './HomePage'
 import NotFound from './NotFound'
+import StreamsPage from './StreamsPage'
+import AnalyticsPage from './AnalyticsPage'
+import ModelsPage from './ModelsPage'
+import DevicesPage from './DevicesPage'
+import AdminPage from './AdminPage'
 
 const useStyles = makeStyles((theme) => ({
     content: {
@@ -27,16 +32,22 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Page() {
     const classes = useStyles()
-
     return (
         <main className={classes.content}>
             <Toolbar />
-            <Router>
-                <Switch>
-                    <Route exact path="/" component={HomePage}></Route>
-                    <Route path="*" component={NotFound}></Route>
-                </Switch>
-            </Router>
+            <Switch>
+                <Route exact path="/home" component={HomePage}></Route>
+                <Route exact path="/streams" component={StreamsPage}></Route>
+                <Route
+                    exact
+                    path="/analytics"
+                    component={AnalyticsPage}
+                ></Route>
+                <Route exact path="/models" component={ModelsPage}></Route>
+                <Route exact path="/devices" component={DevicesPage}></Route>
+                <Route exact path="/admin" component={AdminPage}></Route>
+                <Route path="*" component={NotFound}></Route>
+            </Switch>
         </main>
     )
 }

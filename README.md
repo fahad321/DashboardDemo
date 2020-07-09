@@ -6,6 +6,8 @@ In the project directory, you can run:
 
 ### `npm start`
 
+###### don't forget to do `npm install` after cloning the repo to install dependencies, then do `npm start`
+
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 

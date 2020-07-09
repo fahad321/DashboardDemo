@@ -17,6 +17,7 @@ import TimelineTwoToneIcon from '@material-ui/icons/TimelineTwoTone'
 import BubbleChartTwoToneIcon from '@material-ui/icons/BubbleChartTwoTone'
 import VideogameAssetTwoToneIcon from '@material-ui/icons/VideogameAssetTwoTone'
 import SupervisorAccountTwoToneIcon from '@material-ui/icons/SupervisorAccountTwoTone'
+import { Link } from 'react-router-dom'
 
 const drawerWidth = 240
 
@@ -49,36 +50,40 @@ export default function SideDrawer() {
                 <List>
                     {['Home', 'Streams', 'Analytics', 'Models', 'Devices'].map(
                         (text, index) => (
-                            <ListItem button key={text}>
-                                <ListItemIcon>
-                                    {text === 'Home' ? (
-                                        <HomeTwoToneIcon />
-                                    ) : text === 'Streams' ? (
-                                        <VideoLibraryTwoToneIcon />
-                                    ) : text === 'Analytics' ? (
-                                        <TimelineTwoToneIcon />
-                                    ) : text === 'Models' ? (
-                                        <BubbleChartTwoToneIcon />
-                                    ) : (
-                                        <VideoLibraryTwoToneIcon />
-                                    )}
-                                </ListItemIcon>
-                                <ListItemText primary={text} />
-                            </ListItem>
+                            <Link to={`/${text.toLowerCase()}`}>
+                                <ListItem button key={text}>
+                                    <ListItemIcon>
+                                        {text === 'Home' ? (
+                                            <HomeTwoToneIcon />
+                                        ) : text === 'Streams' ? (
+                                            <VideoLibraryTwoToneIcon />
+                                        ) : text === 'Analytics' ? (
+                                            <TimelineTwoToneIcon />
+                                        ) : text === 'Models' ? (
+                                            <BubbleChartTwoToneIcon />
+                                        ) : (
+                                            <VideoLibraryTwoToneIcon />
+                                        )}
+                                    </ListItemIcon>
+                                    <ListItemText primary={text} />
+                                </ListItem>
+                            </Link>
                         )
                     )}
                 </List>
                 <Divider />
                 <List>
                     {['Admin'].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>
-                                {text === 'Admin' ? (
-                                    <SupervisorAccountTwoToneIcon />
-                                ) : null}
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItem>
+                        <Link to={`/${text.toLowerCase()}`}>
+                            <ListItem button key={text}>
+                                <ListItemIcon>
+                                    {text === 'Admin' ? (
+                                        <SupervisorAccountTwoToneIcon />
+                                    ) : null}
+                                </ListItemIcon>
+                                <ListItemText primary={text} />
+                            </ListItem>
+                        </Link>
                     ))}
                 </List>
             </div>

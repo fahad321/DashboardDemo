@@ -15,6 +15,7 @@ import MailIcon from '@material-ui/icons/Mail'
 import Head from './Head'
 import SideDrawer from './SideDrawer'
 import Page from './Page'
+import { Route, Switch, Link, BrowserRouter as Router } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -31,10 +32,12 @@ export default function ClippedDrawer() {
 
     return (
         <div className={classes.root}>
-            <CssBaseline />
-            <Head />
-            <SideDrawer />
-            <Page />
+            <Router>
+                <CssBaseline />
+                <Head />
+                <SideDrawer />
+                <Page />
+            </Router>
         </div>
     )
 }
