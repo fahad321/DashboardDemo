@@ -48,7 +48,7 @@ export default function SideDrawer() {
             <Toolbar />
             <div className={classes.drawerContainer}>
                 <List>
-                    {['Home', 'Streams', 'Analytics', 'Models', 'Devices'].map(
+                    {['Home', 'Streams', 'Analytics', 'Models', 'Library', 'Devices'].map(
                         (text, index) => (
                             <Link to={`/${text.toLowerCase()}`}>
                                 <ListItem button key={text}>
@@ -61,7 +61,9 @@ export default function SideDrawer() {
                                             <TimelineTwoToneIcon />
                                         ) : text === 'Models' ? (
                                             <BubbleChartTwoToneIcon />
-                                        ) : (
+                                        )  : text === 'Library' ? (
+                                            <VideoLibraryTwoToneIcon />
+                                        ): (
                                             <VideoLibraryTwoToneIcon />
                                         )}
                                     </ListItemIcon>

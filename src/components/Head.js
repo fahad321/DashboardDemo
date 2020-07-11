@@ -5,10 +5,11 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import grey from '@material-ui/core/colors/grey'
+import { blue } from '@material-ui/core/colors'
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
-        background: grey[900],
+        background: blue[900],
         zIndex: theme.zIndex.drawer + 1,
         // height: '7vh',
     },
@@ -21,7 +22,7 @@ export default function Header() {
         <AppBar position="fixed" className={classes.appBar}>
             <Toolbar>
                 <Typography variant="h6" noWrap>
-                    Dashboard
+                    Aiotize
                 </Typography>
                 {/* <Button variant="contained">Default</Button> */}
             </Toolbar>

@@ -22,6 +22,7 @@ import AnalyticsPage from './AnalyticsPage/AnalyticsPage'
 import ModelsPage from './ModelsPage/ModelsPage'
 import DevicesPage from './DevicesPage/DevicesPage'
 import AdminPage from './AdminPage/AdminPage'
+import LibraryPage from './LibraryPage/LibraryPage'
 
 const useStyles = makeStyles((theme) => ({
     content: {
@@ -44,9 +45,10 @@ export default function Page() {
                     component={AnalyticsPage}
                 ></Route>
                 <Route exact path="/models" component={ModelsPage}></Route>
+                <Route exact path="/library" component={LibraryPage}></Route>
                 <Route exact path="/devices" component={DevicesPage}></Route>
                 <Route exact path="/admin" component={AdminPage}></Route>
-                <Route path="*" component={NotFound}></Route>
+                
             </Switch>
         </main>
     )
