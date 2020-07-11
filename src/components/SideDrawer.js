@@ -48,33 +48,43 @@ export default function SideDrawer() {
             <Toolbar />
             <div className={classes.drawerContainer}>
                 <List>
-                    {['Home', 'Streams', 'Analytics', 'Models', 'Devices'].map(
-                        (text, index) => (
-                            <Link to={`/${text.toLowerCase()}`}>
-                                <ListItem button key={text}>
-                                    <ListItemIcon>
-                                        {text === 'Home' ? (
-                                            <HomeTwoToneIcon />
-                                        ) : text === 'Streams' ? (
-                                            <VideoLibraryTwoToneIcon />
-                                        ) : text === 'Analytics' ? (
-                                            <TimelineTwoToneIcon />
-                                        ) : text === 'Models' ? (
-                                            <BubbleChartTwoToneIcon />
-                                        ) : (
-                                            <VideoLibraryTwoToneIcon />
-                                        )}
-                                    </ListItemIcon>
-                                    <ListItemText primary={text} />
-                                </ListItem>
-                            </Link>
-                        )
-                    )}
+                    {[
+                        'Home',
+                        'Streams',
+                        'Analytics',
+                        'Models',
+                        'Library',
+                        'Devices',
+                    ].map((text, index) => (
+                        <Link
+                            to={
+                                text === 'Home' ? `/` : `/${text.toLowerCase()}`
+                            }
+                            key={index}
+                        >
+                            <ListItem button>
+                                <ListItemIcon>
+                                    {text === 'Home' ? (
+                                        <HomeTwoToneIcon />
+                                    ) : text === 'Streams' ? (
+                                        <VideoLibraryTwoToneIcon />
+                                    ) : text === 'Analytics' ? (
+                                        <TimelineTwoToneIcon />
+                                    ) : text === 'Models' ? (
+                                        <BubbleChartTwoToneIcon />
+                                    ) : (
+                                        <VideoLibraryTwoToneIcon />
+                                    )}
+                                </ListItemIcon>
+                                <ListItemText primary={text} />
+                            </ListItem>
+                        </Link>
+                    ))}
                 </List>
                 <Divider />
                 <List>
                     {['Admin'].map((text, index) => (
-                        <Link to={`/${text.toLowerCase()}`}>
+                        <Link to={`/${text.toLowerCase()}`} key={index}>
                             <ListItem button key={text}>
                                 <ListItemIcon>
                                     {text === 'Admin' ? (
