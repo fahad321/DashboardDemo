@@ -26,7 +26,7 @@ import LibraryPage from './LibraryPage/LibraryPage'
 
 const useStyles = makeStyles((theme) => ({
     content: {
-        flexGrow: 1,
+        flexGrow: 2,
         padding: theme.spacing(3),
     },
 }))
