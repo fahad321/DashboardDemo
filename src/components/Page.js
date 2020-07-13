@@ -45,10 +45,11 @@ export default function Page() {
                     component={AnalyticsPage}
                 ></Route>
                 <Route exact path="/models" component={ModelsPage}></Route>
+                <Route exact path="/library" component={LibraryPage}></Route>
                 <Route exact path="/devices" component={DevicesPage}></Route>
                 <Route exact path="/library" component={LibraryPage}></Route>
                 <Route exact path="/admin" component={AdminPage}></Route>
-                <Route path="*" component={NotFound}></Route>
+                
             </Switch>
         </main>
     )
