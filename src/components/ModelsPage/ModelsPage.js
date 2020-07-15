@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
     },
     paper: {
-        padding: theme.spacing(3),
+        padding: theme.spacing(6),
         textAlign: 'center',
         color: theme.palette.text.secondary,
     },
@@ -48,6 +48,9 @@ export default function ModelsPage() {
                         <ModelCard heading="Model3" status="u" />
                     </Grid>
                 </Grid>
+                <br />
+                <br />
+                <br />
                 <Grid container spacing={3}>
                     <Grid item xs>
                         <ModelCard heading="Model4" status="u" />
