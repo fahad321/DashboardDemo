@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -9,112 +9,209 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-
-
-
+import ReactPlayer from 'react-player'
+import Edit from '@material-ui/icons/Edit'
+import { filterData, SearchType } from 'filter-data';
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
+import Button from '@material-ui/core/Button';
+import Favorite from '@material-ui/icons/Favorite';
+import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import Checkbox from '@material-ui/core/Checkbox';
 
 const useStyles = makeStyles({
     root: {
         flexGrow: 1,
-      },
+    },
     table: {
         minWidth: 650,
-      },
-  });
-  
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
+    },
+});
 
+function createData(videos, status, model, manage, device, favourite) {
+    return { videos, status, model, manage, device, favourite };
+}
 const rows = [
-  createData('Frozen yoghurt', 'Online', 2, 24, 4.0),
-  createData('Ice cream sandwich', 'Online', 2, 37, 4.3),
-  createData('Eclair', 'Online', 2, 24, 6.0),
-  createData('Cupcake', 'Online', 2, 67, 4.3),
-  createData('Gingerbread', 'Online', 2, 49, 3.9),
-  createData('Cupcake', 'Online', 2, 67, 4.3),
-  createData('Gingerbread', 'Online', 2, 49, 3.9),
+    createData("https://www.youtube.com/watch?v=ug50zmP9I7s", 'Online', 2, 24, 'Cam1', true),
+    createData("https://www.youtube.com/watch?v=Bey4XXJAqS8", 'Offline', 2, 37, 'Cam2', true),
+    createData("https://www.youtube.com/watch?v=Bey4XXJAqS8", 'Online', 2, 24, 'Cam3', false),
+    createData("https://www.youtube.com/watch?v=ug50zmP9I7s", 'Offline', 2, 67, 'Cam4', false),
+    createData("https://www.youtube.com/watch?v=Bey4XXJAqS8", 'Online', 2, 49, 'Cam5', false),
 ];
 
+const options = [
+    { value: 0, label: 'select' },
+    { value: 1, label: 'one' },
+    { value: 2, label: 'two' },
+    { value: 3, label: 'three' },
+    { value: 4, label: 'four' },
+];
+const defaultOption = options[0];
 
+function shoot() {
+    window.location.href = 'devices';
+}
+function visualization() {
 
-
-  export default function CenteredTabs() {
- 
+    if (visModel == 0) {
+        alert("Please select a model")
+    }
+    else {
+        window.location.href = 'analytics';
+    }
+}
+const ab = [true, true, false, true, true];
+var visModel = 0;
+export default function Streams() {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
-  
+    const [Results, setResults] = React.useState(rows);
+    const [models, setModels] = React.useState(options);
+
+    const [rowData, setRow] = useState(rows);
+    const [selected, setChecked] = React.useState(ab);
+
     const handleChange = (event, newValue) => {
-      setValue(newValue);
-      
+        setValue(newValue);
+        if (newValue == 1) {
+            var searchConditions = [
+                {
+                    key: 'status',
+                    value: 'Online',
+                    type: SearchType.LK,
+                },
+            ];
+            var result = filterData(rows, searchConditions);
+            setResults(result);
+            console.log(result);
+        }
+        else if (newValue == 2) {
+            var searchConditions = [
+                {
+                    key: 'status',
+                    value: 'Offline',
+                    type: SearchType.LK,
+                },
+            ];
+            var result = filterData(rows, searchConditions);
+            setResults(result);
+        }
+        else if (newValue == 3) {
+            var searchConditions = [
+                {
+                    key: 'favourite',
+                    value: 'true',
+                    type: SearchType.LK,
+                },
+            ];
+            var result = filterData(rows, searchConditions);
+            setResults(result);
+        }
+        else {
+            setResults(rows);
+        }
     };
-  
+    const selectedModel = (event) => {
+        visModel = (event.value);
+    };
+
+    const checkBoxHandleChange = (event) => {
+    };
+
     return (
-        <div id="parent">
-        <div id="1">
-      <Paper className={classes.root}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          indicatorColor="primary"
-          textColor="primary"
-          centered
-        >
-          <Tab label="All Media" />
-          <Tab label="Online" />
-          <Tab label="Offline" />
-          <Tab label="Favourities" />
-          <Tab label="Filters" />
-          <Tab label="Help" />
-        </Tabs>
-      </Paper>
-      </div>
-      <div id="1">
-      <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Video</TableCell>
-            <TableCell >Status</TableCell>
-            <TableCell >Model</TableCell>
-            <TableCell >Manage</TableCell>
-           
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
-              <img height={50} width={65} src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAbFBMVEX///8AAABhYWEwMDB1dXVycnKUlJTCwsLW1tbLy8tlZWXc3NwkJCRDQ0OMjIy3t7ddXV1SUlKEhIRra2vx8fF9fX2cnJwrKyuoqKjp6enh4eEQEBA5OTnS0tIeHh6tra0+Pj5NTU0XFxf29va3BJcTAAAEGElEQVR4nO2dbXeiMBBGiVVrrYiK+FKta7f//z/untOaoAYYTydkJn3uRyAMt7AjIZNNlgEAAAAAAAAAAAAAAAAAAIhlshvlxyeF5OVu0q23nxvdzPetfusq9gUyUK2bBYtD7Ktj4VA0CaZwA7+o/ILT2NfFyNQnOIx9VawM7wV3sa+Jmd2t4GvsK2Ln9cbwXN95WqzGHWyOl4PzTdexlyYuk1XkNvmlybGzyXwwq0ucrwWfa7u2xWdTtvXlJc8T34B7Tm7/vs3Y7ODNHTd8Ftuax/PVvtztKGmhB48bTmwMwsvVN6NLkwHt+NKJ5P7YZkUMLdQwWxlvFPcyuqSGlmqYLW2UuXfrG/VEYg3ffHdrbTcuyKHFGmYLG8a9gu/ttsZ31jvkGhY2jOtIvT/+kAo2dI/pu93mfg3JpxFsmNkw7hcRhj5g6AGGPmDoA4ZEYOhBmaHtATd8ufMQvAf8TavhgMrUfjHYTqltXA9mSQ5jO+0zchj7dHkN0wKG+oGhfmCon99pOEyBVkP6q5FgYKgfGOoHhvqBoX5gqB8Y6geG+oGhfmDIzGS82rRPEGCnX8OvQrq7gt2g9Gq4+T5vTh9P+zm9GtoTPzDMyBe0B0NXTmbM6bn7eB76NHwxdcqW6TqcxDPsK+PENDTnPjJOVENj5pSJAD8jsqHZBs84sQ2NmQbOOPENjfnDHOcaCYbmI2TGEWF4PRmCGSGG5u8LczCLFENjRoEyjhxDcwiTcQQZ/u9VhegcizI0ZswcMhNnaJ7YM440Q2OGzK+q8gwfmVBGQaKhWdKnlHUj0pA14wg1NCe2R1WqId9tlGv4wPzOVgQbMt1EwYbU/wugA8GG6d/D5P8dcn0vlmrI1+cXasj4pVikIev4okRD3hEbeYbco27SDPnHMYQZBhiLEmV45uz5XpBkGGZMWI5hGaiSSIrhIdhIqRDD1Meekh8/TH0MeJD4OH7ytRip19P0UoUZ0zBshrkQzzDF2sR6feksyfrSWo0w09feh4L2Wef9EaKX1ESvhunX6mfZa+rzLWIAQ/3AUD8w1A8M9QND/cBQPzDUDwz188sNRynQapgWMNQPDPUDQ/38TkPyGhJq17egvxppXaOEfpr015mBoQcY+oChDxgSgaEHGPpgMkx/Ldn01wNOf03n9NflTnRt9frUcBebXCUp1XBl/FFyt72knUmoYelE8qsd9e8Ys4JSrWx7wHTD4D3gdTGredzUJB9ru8xpsRp3sLEN8k3XsRcqG6CiNtnYh+vYGWa1ONUlzo1/31S4e052sa+IGU9Z8rC7lSK82WHa3U4NDXmp6m6phMYvnMUh9qWxcGjpP6xTuI1V+8/5ft59CtHMCVMfJrsyf9JIXu7or4MAAAAAAAAAAAAAAAAAAAC98w+9jGR2gcBLOwAAAABJRU5ErkJggg=="/>
-              </TableCell>
-              <TableCell >{row.calories}</TableCell>
-              <TableCell >{row.fat}</TableCell>
-              <TableCell >{row.carbs}</TableCell>
-              
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-    </div>
-    </div>
+        <div id="parent" >
+            <div id="1">
+                <Paper className={classes.root}>
+                    <Tabs
+                        value={value}
+                        onChange={handleChange}
+                        indicatorColor="primary"
+                        textColor="primary"
+                        centered
+                    >
+                        <Tab label="All Media" />
+                        <Tab label="Online" />
+                        <Tab label="Offline" />
+                        <Tab label="Favourities" />
+
+                    </Tabs>
+                </Paper>
+            </div>
+            <div id="1">
+                <TableContainer component={Paper}>
+                    <Table className={classes.table} aria-label="simple table">
+                        <TableHead>
+                            <TableRow>
+
+                                <TableCell>Video</TableCell>
+                                <TableCell >Status</TableCell>
+                                <TableCell >Model</TableCell>
+                                <TableCell >device</TableCell>
+                                <TableCell >Manage</TableCell>
+                                <TableCell >Favourite</TableCell>
+
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {Results.map((row, i) => (
+                                <TableRow key={i}>
+
+                                    <TableCell component="th" scope="row">
+                                        <div className='player-wrapper'>
+                                            <ReactPlayer className='react-player'
+                                                url={row.videos}
+                                                width='100%'
+                                                height='100%'
+
+                                            />
+                                        </div>
+                                    </TableCell>
+
+                                    <TableCell >{row.status}</TableCell>
+                                    <TableCell >
+                                        <Dropdown className="div" id={i + "d"} options={models} value={defaultOption}
+                                            onChange={selectedModel} />
+
+                                        <Button onClick={visualization} className="div" variant="contained" color="primary" >
+                                            Visualization
+                                        </Button>
+                                    </TableCell>
+                                    <TableCell >{row.device}</TableCell>
+                                    <TableCell onClick={shoot}><Edit></Edit></TableCell>
+                                    <TableCell >
+
+                                        <Checkbox
+                                            id={i}
+                                            checked={row.favourite}
+                                            onChange={checkBoxHandleChange}
+                                        />
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </div>
+        </div>
     );
-  }
+}
 
-  
 
- class StreamsPage extends Component {
-  
-        
 
-    
-   
-   
+class StreamsPage extends Component {
+
+
+
+
+
+
     render() {
 
-        
-        
-          
+
+
+
 
         return <div></div>
     }
