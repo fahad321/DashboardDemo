@@ -11,6 +11,9 @@ import MenuItem from '@material-ui/core/MenuItem'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
+import { connect } from 'react-redux'
+import { insertIntoItems } from '../../actions/library/insertIntoItems'
+import { insertIntoInFocusItem } from '../../actions/library/insertIntoInFocusItem'
 
 const styles = (theme) => ({
     root: {
@@ -332,4 +335,24 @@ class LibraryPage extends Component {
     }
 }
 
-export default withStyles(styles, { withTheme: true })(LibraryPage)
+const mapStateToProps = (state) => {
+    return {
+        state: state,
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        insertIntoItems: (data) => {
+            return dispatch(insertIntoItems(data))
+        },
+        insertIntoInFocusItem: (data) => {
+            return dispatch(insertIntoInFocusItem(data))
+        },
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(withStyles(styles, { withTheme: true })(LibraryPage))
