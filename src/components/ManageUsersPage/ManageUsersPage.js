@@ -48,7 +48,7 @@ const tableIcons = {
     ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
 }
 
-export default class DevicesPage extends Component {
+export default class ManageUsersPage extends Component {
     constructor(props) {
         super(props)
         this.state = {
