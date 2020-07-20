@@ -51,7 +51,8 @@ export default function SideDrawer() {
                     {[
                         'Home',
                         'Streams',
-                        'Analytics',
+                        'Visualize',
+                        'Analyze',
                         'Models',
                         'Library',
                         'Devices',
@@ -83,11 +84,14 @@ export default function SideDrawer() {
                 </List>
                 <Divider />
                 <List>
-                    {['Admin'].map((text, index) => (
-                        <Link to={`/${text.toLowerCase()}`} key={index}>
+                    {['Manage Users'].map((text, index) => (
+                        <Link
+                            to={`/${text.replace(/\s/g, '').toLowerCase()}`}
+                            key={index}
+                        >
                             <ListItem button key={text}>
                                 <ListItemIcon>
-                                    {text === 'Admin' ? (
+                                    {text === 'Manage Users' ? (
                                         <SupervisorAccountTwoToneIcon />
                                     ) : null}
                                 </ListItemIcon>

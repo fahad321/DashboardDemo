@@ -21,8 +21,9 @@ import StreamsPage from './StreamsPage/StreamsPage'
 import AnalyticsPage from './AnalyticsPage/AnalyticsPage'
 import ModelsPage from './ModelsPage/ModelsPage'
 import DevicesPage from './DevicesPage/DevicesPage'
-import AdminPage from './AdminPage/AdminPage'
+import ManageUsersPage from './ManageUsersPage/ManageUsersPage'
 import LibraryPage from './LibraryPage/LibraryPage'
+import VisualizePage from './VisualizePage/VisualizePage'
 
 const useStyles = makeStyles((theme) => ({
     content: {
@@ -41,6 +42,11 @@ export default function Page() {
                 <Route exact path="/streams" component={StreamsPage}></Route>
                 <Route
                     exact
+                    path="/Visualize"
+                    component={VisualizePage}
+                ></Route>
+                <Route
+                    exact
                     path="/analytics"
                     component={AnalyticsPage}
                 ></Route>
@@ -48,8 +54,11 @@ export default function Page() {
                 <Route exact path="/library" component={LibraryPage}></Route>
                 <Route exact path="/devices" component={DevicesPage}></Route>
                 <Route exact path="/library" component={LibraryPage}></Route>
-                <Route exact path="/admin" component={AdminPage}></Route>
-                
+                <Route
+                    exact
+                    path="/manageusers"
+                    component={ManageUsersPage}
+                ></Route>
             </Switch>
         </main>
     )
