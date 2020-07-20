@@ -51,10 +51,10 @@ code {
   
   .react-player {
     position: absolute;
-    height: 70px !important;
-    top: -10px;
+    height: 120px !important;
+    top: -4px;
     left: 0;
-    width: 100px!important;
+    width: 170px!important;
     
   }
   .Dropdown-control {
@@ -73,3 +73,10 @@ code {
     text-transform: none !important;
   }
   
+  .info {
+    opacity: 0;
+ }
+ 
+ .info:hover {
+     opacity: 1;
+ }
