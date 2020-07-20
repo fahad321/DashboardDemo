@@ -105,72 +105,7 @@ const options = [
 ];
 const defaultOption = options[0];
 
-
-/*
-function sortRows(){
-    const tempResult = [...rows];
-    let sortDirection = "DESC";
-    if (sortDirection === "ASC") {
-        alert(321)
-    } else if (sortDirection === "DESC") {
-        alert("ok");
-        let i = 0;
-        let j, min, temp;
-        for (i; i < tempResult.length - 1; i++) {
-            min = i;
-            for (j = i + 1; j < tempResult.length; j++) {
-                if (tempResult[j].favourite > tempResult[min].favourite) {
-                    min = j;
-                    alert("no");
-                    temp = tempResult[i].favourite;
-                    tempResult[i].favourite = tempResult[min].favourite;
-                    tempResult[min].favourite = temp;
-                }
-
-            }
-        }
-    }
-
-   // setResults(tempResult);
-}
-*/
-
-
-
-/*
-const sortRows = () => {
-    const tempResult = [...Results];
-    let sortDirection = "DESC";
-    if (sortDirection === "ASC") {
-        alert(321)
-    } else if (sortDirection === "DESC") {
-        alert("ok");
-        let i = 0;
-        let j, min, temp;
-        for (i; i < tempResult.length - 1; i++) {
-            min = i;
-            for (j = i + 1; j < tempResult.length; j++) {
-                if (tempResult[j].favourite > tempResult[min].favourite) {
-                    min = j;
-                    alert("no")
-                    temp = tempResult[i].favourite;
-                    tempResult[i].favourite = tempResult[min].favourite;
-                    tempResult[min].favourite = temp;
-                }
-
-            }
-        }
-    }
-
-    setResults(tempResult);
-};
-
-*/
 var visModel = 0;
-
-
-
-
 
 export default function StreamPage(props) {
     const classes = useStyles();
@@ -179,13 +114,7 @@ export default function StreamPage(props) {
     const [models, setModels] = React.useState(options);
     const [searchInput, setSearch] = React.useState("");
     const [values, setValues] = React.useState(props.value);
-    const [sortDirection, setSortDirection] = React.useState("DESC");
-    
-
-
-    const defaultColumnProperties = {
-        sortable: true,
-    };
+    const [sortDirection, setSortDirection] = React.useState("ASC");
 
     const handleChanges = (event) => {
         setValues(event.target.value);
@@ -284,58 +213,25 @@ export default function StreamPage(props) {
     const [sortType, setSortType] = React.useState('device');
     useEffect(() => {
         const sortArray = () => {
-          const types = {
-            device: 'device',
-          };
-          let type ='device';
-          const sortProperty = types[type];
-          const sorted = [...rows].sort((a, b) => b[sortProperty] - a[sortProperty]);
-          alert(123);
-          console.log(sorted);
-          setResults(sorted);
-        };
-    
-        sortArray(sortType);
-      }, [sortType]);
-
-    const sortRows = () => {
-        /*
-                const tempResults = [...Results];
-                if (sortDirection === "ASC") {
-                    alert(123);
-                    //return a.devices > b.devices ? 1 : -1;
-                } else\
-          */
-
-        if (sortDirection === "DESC") {
-            alert("iko")
-            var type = "device";
             const types = {
                 device: 'device',
             };
+            let type = 'device';
             const sortProperty = types[type];
-            const sortResults = [...Results].sort((a, b) => b[sortProperty] - a[sortProperty]);
+            if (sortDirection === "ASC") {
+                const sorted = [...rows].sort((a, b) => a[sortProperty].localeCompare(b[sortProperty]));
+                setResults(sorted);
+                setSortDirection("DESC");
+            }
+            else {
+                const sorted = [...rows].sort((a, b) => b[sortProperty].localeCompare(a[sortProperty]));
+                setResults(sorted);
+                setSortDirection("ASC");
 
-            //const SortResults= tempResults.sort((a,b) => b[] > a[]);
-            console.log(sortResults);
-            setResults(sortResults);
-        }
-
-        /*
-        if (sortDirection === "DESC") {
-            setSortDirection("ASC");
-
-        }
-        else {
-            setSortDirection("DESC");
-        }
-        */
-    };
-
-
-
-
-
+            }
+        };
+        sortArray(sortType);
+    }, [sortType]);
 
     return (
 
@@ -434,10 +330,6 @@ export default function StreamPage(props) {
                                     }
                                 </TableCell>
 
-
-
-
-
                                 <TableCell width='200px'>
                                     <Dropdown className="div" id={i + "d"} options={models} value={defaultOption}
                                         onChange={selectedModel} />
@@ -464,7 +356,6 @@ export default function StreamPage(props) {
                                         }
                                     </div>
 
-
                                 </TableCell>
                             </TableRow>
                         ))}
@@ -475,7 +366,6 @@ export default function StreamPage(props) {
         </div>
     );
 }
-
 
 class StreamsPage extends Component {
 
