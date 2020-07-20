@@ -1,72 +1,66 @@
 import React, { Component } from 'react'
-import Typography from '@material-ui/core/Typography'
-import Toolbar from '@material-ui/core/Toolbar'
-import { Link } from 'react-router-dom'
-import ReactPlayer from 'react-player'
-import ReactDOM from 'react-dom';
-import Table from 'react-table';
+import HomeCard from './HomeCard'
+import MultilineChartIcon from '@material-ui/icons/MultilineChart'
+import { makeStyles } from '@material-ui/core/styles'
+import Paper from '@material-ui/core/Paper'
+import Grid from '@material-ui/core/Grid'
 
+const useStyles = makeStyles((theme) => ({
+    root: {
+        flexGrow: 1,
+    },
+    paper: {
+        padding: theme.spacing(6),
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
+        height: '70vh',
+        overflowY: 'scroll',
+        overflowX: 'visible',
+    },
+}))
 
- export default class HomePage extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-       students: [
-          { id: 1, name: 'Wasif', age: 21, email: 'wasif@email.com' },
-          { id: 2, name: 'Ali', age: 19, email: 'ali@email.com' },
-          { id: 3, name: 'Saad', age: 16, email: 'saad@email.com' },
-          { id: 4, name: 'Asad', age: 25, email: 'asad@email.com' }
-       ]
-    }
- }  
+export default function ModelsPage() {
+    const classes = useStyles()
 
- renderTableHeader() {
-  let header = Object.keys(this.state.students[0])
-  return header.map((key, index) => {
-     return <th key={index}>{key.toUpperCase()}</th>
-  })
+    return (
+        <div className={classes.root}>
+            <Paper className={classes.paper} variant="outlined">
+                <Grid container spacing={3}>
+                    <Grid item xs>
+                        <HomeCard
+                            heading="Container Detected All Time"
+                            amount="146"
+                            status="n"
+                        />
+                    </Grid>
+                    <Grid item xs>
+                        <HomeCard
+                            heading="Container Detected in last 24 Hour"
+                            amount="29"
+                            status="u"
+                        />
+                    </Grid>
+                </Grid>
+                <br />
+                <br />
+                <br />
+                <Grid container spacing={3}>
+                    <Grid item xs>
+                        <HomeCard
+                            heading="Healthy Container"
+                            amount="19"
+                            status="u"
+                        />
+                    </Grid>
+                    <Grid item xs>
+                        <HomeCard
+                            heading="Unhealthy container"
+                            amount="10"
+                            status="u"
+                        />
+                    </Grid>
+                </Grid>
+            </Paper>
+        </div>
+    )
 }
-
-renderTableData() {
-  return this.state.students.map((student, index) => {
-     const { id, name, age, email } = student //destructuring
-     return (
-        <tr key={id}>
-           <td>{id}</td>
-           <td>{name}</td>
-           <td>{age}</td>
-           <td>{email}</td>
-        </tr>
-     )
-  })
-}
-
-  render() {
-
-    
-
-        return (
-            <div>
-                <Typography paragraph>
-                
-                </Typography>
-                <div>
-           <table  id='students'>
-              <tbody>
-                 <tr>{this.renderTableHeader()}</tr>
-                 {this.renderTableData()}
-              </tbody>
-           </table>
-           <ReactPlayer
-        url="https://www.youtube.com/watch?v=ug50zmP9I7s"
-      />
-    </div>
-    
-          
-        
-                </div>             
-        )
-    }
-    
-  }
-
