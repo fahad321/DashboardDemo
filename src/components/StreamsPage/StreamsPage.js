@@ -3,23 +3,15 @@ import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import ReactPlayer from 'react-player'
-import Edit from '@material-ui/icons/Edit'
 import { filterData, SearchType } from 'filter-data';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
-import Button from '@material-ui/core/Button';
-import Favorite from '@material-ui/icons/Favorite';
-import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import CheckBoxIcon from '@material-ui/icons/CheckBox';
-import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
 import { blue } from '@material-ui/core/colors';
 import FormControl from '@material-ui/core/FormControl'
@@ -29,14 +21,12 @@ import SearchIcon from "@material-ui/icons/Search";
 import SettingsIcon from '@material-ui/icons/Settings';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
-import { Redirect } from 'react-router-dom';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import StarIcon from '@material-ui/icons/Star';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import Brightness1Icon from '@material-ui/icons/Brightness1';
-
-const ENTER_KEY = 13;
+import TimelineOutlinedIcon from '@material-ui/icons/TimelineOutlined';
 
 const theme = createMuiTheme({
     palette: {
@@ -95,7 +85,6 @@ const rows = [
     createData("https://www.youtube.com/watch?v=Bey4XXJAqS8", 'Online', 2, 49, 'Lam5', false),
 ];
 
-const colums = ['device', 'manage'];
 const options = [
     { value: 0, label: 'select' },
     { value: 1, label: 'one' },
@@ -106,15 +95,16 @@ const options = [
 const defaultOption = options[0];
 
 var visModel = 0;
+const ENTER_KEY = 13;
 
 export default function StreamPage(props) {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
     const [Results, setResults] = React.useState(rows);
     const [models, setModels] = React.useState(options);
-    const [searchInput, setSearch] = React.useState("");
     const [values, setValues] = React.useState(props.value);
     const [sortDirection, setSortDirection] = React.useState("ASC");
+    const [sortType, setSortType] = React.useState('device');
 
     const handleChanges = (event) => {
         setValues(event.target.value);
@@ -189,28 +179,23 @@ export default function StreamPage(props) {
         visModel = (event.value);
     };
 
-    const checkBoxHandleChange = (id, event) => {
-
+    const starHandleChange = (id, event) => {
         let rowId = id;
         const tempResult = [...Results];
         tempResult[rowId].favourite = !tempResult[rowId].favourite;
         setResults(tempResult);
-
     };
 
-
-    const visualization = () => {
-
+    const visualization = (e) => {
         if (visModel == 0) {
             alert("Please select a model")
-            return false;
+            e.preventDefault();
         }
         else {
-            window.location.href = 'analytics';
+            return true;
         }
     };
 
-    const [sortType, setSortType] = React.useState('device');
     useEffect(() => {
         const sortArray = () => {
             const types = {
@@ -227,7 +212,6 @@ export default function StreamPage(props) {
                 const sorted = [...rows].sort((a, b) => b[sortProperty].localeCompare(a[sortProperty]));
                 setResults(sorted);
                 setSortDirection("ASC");
-
             }
         };
         sortArray(sortType);
@@ -248,13 +232,11 @@ export default function StreamPage(props) {
                     <Tab label="Online" />
                     <Tab label="Offline" />
                     <Tab label="Favourities" />
-
                     <FormControl
                         disabled='disabled'
                         variant="outlined"
                         className={classes.formControl}
                     >
-
                         <TextField id="standard-basic"
                             float='right'
                             placeholder={('Search')}
@@ -274,21 +256,16 @@ export default function StreamPage(props) {
                     </FormControl>
                 </Tabs>
             </Paper>
-
             <br />
-
             <Paper component={Paper}>
                 <Table className={classes.table} aria-label="simple table">
                     <TableHead>
                         <TableRow className={classes.paper}>
-
                             <TableCell>Video</TableCell>
                             <TableCell >Status</TableCell>
                             <TableCell >Model</TableCell>
                             <TableCell >
-
                                 <span>Device</span>
-
                                 <div onClick={setSortType} className="div">
                                     <div class="info">
                                         {sortDirection === "ASC" ? (
@@ -296,14 +273,12 @@ export default function StreamPage(props) {
                                         ) : (
                                                 <KeyboardArrowDownIcon fontSize='small' />
                                             )
-
                                         }
                                     </div>
                                 </div>
                             </TableCell>
                             <TableCell >Manage</TableCell>
                             <TableCell >Favourite</TableCell>
-
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -315,13 +290,10 @@ export default function StreamPage(props) {
                                             url={row.videos}
                                             width='100%'
                                             height='100%'
-
                                         />
                                     </div>
                                 </TableCell>
-
                                 <TableCell width='90px'>
-
                                     {row.status === "Online" ? (
                                         <Brightness1Icon fontSize='small' style={{ fill: "yellow" }} />
                                     ) : (
@@ -329,25 +301,25 @@ export default function StreamPage(props) {
                                         )
                                     }
                                 </TableCell>
-
-                                <TableCell width='200px'>
+                                <TableCell width='150px'>
                                     <Dropdown className="div" id={i + "d"} options={models} value={defaultOption}
                                         onChange={selectedModel} />
-
-                                    <Button onClick={visualization} className="div" variant="contained" color="primary">
-                                        Visualization
-                                    </Button>
-
+                                    <Link onClick={visualization} to={{
+                                        pathname: "/visualize", deviceRow: i
+                                    }} >
+                                        <TimelineOutlinedIcon className="div" fontSize='large' style={{ fill: "white", background: "grey" }}></TimelineOutlinedIcon>
+                                    </Link>
                                 </TableCell>
                                 <TableCell width='50px' >{row.device}</TableCell>
-
                                 <TableCell width='40px'  >
-                                    <Link to="/devices">
+                                    <Link to={{
+                                        pathname: "/devices", deviceRow: i
+                                    }} >
                                         <SettingsIcon></SettingsIcon>
                                     </Link>
                                 </TableCell>
                                 <TableCell width='15px' >
-                                    <div id={i} onClick={(e) => checkBoxHandleChange(i, e)} >
+                                    <div id={i} onClick={(e) => starHandleChange(i, e)} >
                                         {row.favourite === true ? (
                                             <StarIcon fontSize='small' style={{ fill: "yellow" }} />
                                         ) : (
@@ -355,29 +327,18 @@ export default function StreamPage(props) {
                                             )
                                         }
                                     </div>
-
                                 </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
-
             </Paper>
         </div>
     );
 }
 
 class StreamsPage extends Component {
-
-
-
-
-
     render() {
-
-
-
-
         return <div></div>
     }
 }

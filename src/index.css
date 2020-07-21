@@ -80,3 +80,8 @@ code {
  .info:hover {
      opacity: 1;
  }
+ .MuiSvgIcon-fontSizeLarge{
+
+  height:38px !important;
+  width:38px !important;
+ }
