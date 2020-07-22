@@ -105,6 +105,17 @@ export default function StreamPage(props) {
     const [values, setValues] = React.useState(props.value);
     const [sortDirection, setSortDirection] = React.useState("ASC");
     const [sortType, setSortType] = React.useState('device');
+    const [chosenModel, setChosenModel] = React.useState(0);
+
+    let youtubeURL = props.location.deviceRow;
+    let deviceName = props.location.deviceName;
+    useEffect(() => {
+        if (youtubeURL != null && youtubeURL != "") {
+            const newRows = [...rows];
+            const newData = createData(youtubeURL, 'Online', 4, 49, deviceName, false)
+            setResults({ Results: Results.push(newData) })
+        }
+    }, [youtubeURL]);
 
     const handleChanges = (event) => {
         setValues(event.target.value);
@@ -177,6 +188,7 @@ export default function StreamPage(props) {
     };
     const selectedModel = (event) => {
         visModel = (event.value);
+        setChosenModel(event.value);
     };
 
     const starHandleChange = (id, event) => {
@@ -192,6 +204,7 @@ export default function StreamPage(props) {
             e.preventDefault();
         }
         else {
+            visModel = 0;
             return true;
         }
     };
@@ -282,6 +295,7 @@ export default function StreamPage(props) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
+
                         {Results.map((row, i) => (
                             <TableRow key={i}>
                                 <TableCell width='150px' component="th" scope="row">
@@ -305,7 +319,7 @@ export default function StreamPage(props) {
                                     <Dropdown className="div" id={i + "d"} options={models} value={defaultOption}
                                         onChange={selectedModel} />
                                     <Link onClick={visualization} to={{
-                                        pathname: "/visualize", deviceRow: i
+                                        pathname: "/visualize", videoURL: row.videos, myModel: chosenModel
                                     }} >
                                         <TimelineOutlinedIcon className="div" fontSize='large' style={{ fill: "white", background: "grey" }}></TimelineOutlinedIcon>
                                     </Link>

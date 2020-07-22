@@ -51,12 +51,23 @@ const styles = (theme) => ({
 class Body extends Component {
     constructor(props) {
         super(props)
+        
+        const abc = this.props.location.videoURL;
+        const cv= this.props.location.myModel;
         this.state = {
             url: 'https://www.youtube.com/watch?v=B5i68EN-tmY',
             analyzing: true,
             device: 1,
             model: 3,
         }
+    if(this.props.location.videoURL !='' && this.props.location.videoURL !=null)
+    {
+        
+        //this.setState({url: abc});
+        this.state.url = this.props.location.videoURL;
+        this.state.model=this.props.location.myModel;
+        
+    }
     }
 
     handleModelChange = (event) => {
