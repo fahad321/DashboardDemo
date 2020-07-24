@@ -18,6 +18,7 @@ import BubbleChartTwoToneIcon from '@material-ui/icons/BubbleChartTwoTone'
 import VideogameAssetTwoToneIcon from '@material-ui/icons/VideogameAssetTwoTone'
 import SupervisorAccountTwoToneIcon from '@material-ui/icons/SupervisorAccountTwoTone'
 import { Link } from 'react-router-dom'
+import ViewStreamIcon from '@material-ui/icons/ViewStream';
 
 const drawerWidth = 240
 
@@ -68,7 +69,7 @@ export default function SideDrawer() {
                                     {text === 'Home' ? (
                                         <HomeTwoToneIcon />
                                     ) : text === 'Streams' ? (
-                                        <VideoLibraryTwoToneIcon />
+                                        <ViewStreamIcon />
                                     ) : text === 'Analytics' ? (
                                         <TimelineTwoToneIcon />
                                     ) : text === 'Models' ? (
