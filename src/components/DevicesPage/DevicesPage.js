@@ -77,11 +77,17 @@ export default class DevicesPage extends Component {
                     title: 'Other Actions',
                     filed: 'otherActions',
                     render: (rowData) => (
+                        rowData ?
+                           (
                         <Link to={{
                             pathname: "/streams", deviceRow: rowData.url, deviceName : rowData.device
                         }} >
-                            <ViewStreamIcon></ViewStreamIcon>
+                           <ViewStreamIcon></ViewStreamIcon>
                         </Link>
+                           ):
+                           (
+                            <ViewStreamIcon></ViewStreamIcon>
+                           )
                     ),
                 },
             ],
