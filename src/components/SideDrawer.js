@@ -100,6 +100,24 @@ export default function SideDrawer() {
                             </ListItem>
                         </Link>
                     ))}
+                {['Manage Organizations'].map((text, index) => (
+                        <Link
+                            to={`/${text.replace(/\s/g, '').toLowerCase()}`}
+                            key={index}
+                        >
+                            <ListItem button key={text}>
+                                <ListItemIcon>
+                                    {text === 'Manage Organizations' ? (
+                                        <SupervisorAccountTwoToneIcon />
+                                    ) : null}
+                                </ListItemIcon>
+                                <ListItemText primary={text} />
+                            </ListItem>
+                        </Link>
+                    ))}
+
+
+
                 </List>
             </div>
         </Drawer>

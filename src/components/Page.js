@@ -22,6 +22,7 @@ import AnalyticsPage from './AnalyticsPage/AnalyticsPage'
 import ModelsPage from './ModelsPage/ModelsPage'
 import DevicesPage from './DevicesPage/DevicesPage'
 import ManageUsersPage from './ManageUsersPage/ManageUsersPage'
+import ManageOrganizationsPage from './ManageUsersPage/ManageOrganizationsPage'
 import LibraryPage from './LibraryPage/LibraryPage'
 import VisualizePage from './VisualizePage/VisualizePage'
 
@@ -59,6 +60,11 @@ export default function Page() {
                     path="/manageusers"
                     component={ManageUsersPage}
                 ></Route>
+                <Route
+                    exact
+                    path="/manageorganizations"
+                    component={ManageOrganizationsPage}
+                ></Route>                
             </Switch>
         </main>
     )
