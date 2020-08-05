@@ -25,11 +25,11 @@ import ManageUsersPage from './ManageUsersPage/ManageUsersPage'
 import ManageOrganizationsPage from './ManageUsersPage/ManageOrganizationsPage'
 import LibraryPage from './LibraryPage/LibraryPage'
 import VisualizePage from './VisualizePage/VisualizePage'
+import LoginPage from './LoginPage'
 
 const useStyles = makeStyles((theme) => ({
     content: {
         flexGrow: 1,
-        padding: theme.spacing(3),
     },
 }))
 
@@ -39,6 +39,7 @@ export default function Page() {
         <main className={classes.content}>
             <Toolbar />
             <Switch>
+                <Route exact path="/login" component={LoginPage}></Route>
                 <Route exact path="/" component={HomePage}></Route>
                 <Route exact path="/streams" component={StreamsPage}></Route>
                 <Route
@@ -64,7 +65,7 @@ export default function Page() {
                     exact
                     path="/manageorganizations"
                     component={ManageOrganizationsPage}
-                ></Route>                
+                ></Route>
             </Switch>
         </main>
     )

@@ -18,14 +18,11 @@ import { insertIntoFilteredItems } from '../../actions/library/insertIntoFiltere
 import DChart from './DChart'
 
 const styles = (theme) => ({
-    root: {
-        flexGrow: 1,
-    },
+    root: {},
 
-    paper: {
-        padding: theme.spacing(2),
-        textAlign: 'center',
-        color: theme.palette.text.secondary,
+    height: {
+        height: '600px!important',
+        width: '1115px!important',
     },
     video: {
         position: 'absolute',
@@ -36,12 +33,6 @@ const styles = (theme) => ({
         position: 'relative',
         paddingTop: '56.25%',
     },
-    height: {
-        height: '70vh',
-        overflowY: 'scroll',
-        overflowX: 'visible',
-        padding: 20,
-    },
     formControl: {
         margin: theme.spacing(2),
         minWidth: 120,
@@ -51,23 +42,23 @@ const styles = (theme) => ({
 class Body extends Component {
     constructor(props) {
         super(props)
-        
-        const abc = this.props.location.videoURL;
-        const cv= this.props.location.myModel;
+
+        const abc = this.props.location.videoURL
+        const cv = this.props.location.myModel
         this.state = {
             url: 'https://www.youtube.com/watch?v=B5i68EN-tmY',
             analyzing: true,
             device: 1,
             model: 3,
         }
-    if(this.props.location.videoURL !='' && this.props.location.videoURL !=null)
-    {
-        
-        //this.setState({url: abc});
-        this.state.url = this.props.location.videoURL;
-        this.state.model=this.props.location.myModel;
-        
-    }
+        if (
+            this.props.location.videoURL != '' &&
+            this.props.location.videoURL != null
+        ) {
+            //this.setState({url: abc});
+            this.state.url = this.props.location.videoURL
+            this.state.model = this.props.location.myModel
+        }
     }
 
     handleModelChange = (event) => {

@@ -37,14 +37,7 @@ const styles = (theme) => ({
         position: 'relative',
         paddingTop: '56.25%',
     },
-    height: {
-        height: '70vh',
-        overflowY: 'scroll',
-        overflowX: 'visible',
-        padding: 20,
-    },
     formControl: {
-        margin: theme.spacing(2),
         minWidth: 120,
     },
     selectEmpty: {

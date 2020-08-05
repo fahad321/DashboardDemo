@@ -132,7 +132,6 @@ class LibraryPage extends Component {
             <div>
                 <Paper>
                     <Head />
-                    <br />
                     <Body />
                 </Paper>
             </div>

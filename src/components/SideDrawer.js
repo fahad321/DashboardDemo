@@ -18,7 +18,10 @@ import BubbleChartTwoToneIcon from '@material-ui/icons/BubbleChartTwoTone'
 import VideogameAssetTwoToneIcon from '@material-ui/icons/VideogameAssetTwoTone'
 import SupervisorAccountTwoToneIcon from '@material-ui/icons/SupervisorAccountTwoTone'
 import { Link } from 'react-router-dom'
-import ViewStreamIcon from '@material-ui/icons/ViewStream';
+import ViewStreamIcon from '@material-ui/icons/ViewStream'
+import DevicesIcon from '@material-ui/icons/Devices'
+import AssessmentIcon from '@material-ui/icons/Assessment'
+import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle'
 
 const drawerWidth = 240
 
@@ -70,12 +73,22 @@ export default function SideDrawer() {
                                         <HomeTwoToneIcon />
                                     ) : text === 'Streams' ? (
                                         <ViewStreamIcon />
-                                    ) : text === 'Analytics' ? (
-                                        <TimelineTwoToneIcon />
+                                    ) : text === 'Visualize' ? (
+                                        <TimelineTwoToneIcon
+                                            fontSize="small"
+                                            style={{
+                                                fill: 'white',
+                                                background: 'grey',
+                                            }}
+                                        />
+                                    ) : text === 'Analyze' ? (
+                                        <AssessmentIcon />
                                     ) : text === 'Models' ? (
                                         <BubbleChartTwoToneIcon />
-                                    ) : (
+                                    ) : text === 'Library' ? (
                                         <VideoLibraryTwoToneIcon />
+                                    ) : (
+                                        <DevicesIcon />
                                     )}
                                 </ListItemIcon>
                                 <ListItemText primary={text} />
@@ -100,7 +113,7 @@ export default function SideDrawer() {
                             </ListItem>
                         </Link>
                     ))}
-                {['Manage Organizations'].map((text, index) => (
+                    {['Manage Organizations'].map((text, index) => (
                         <Link
                             to={`/${text.replace(/\s/g, '').toLowerCase()}`}
                             key={index}
@@ -108,16 +121,13 @@ export default function SideDrawer() {
                             <ListItem button key={text}>
                                 <ListItemIcon>
                                     {text === 'Manage Organizations' ? (
-                                        <SupervisorAccountTwoToneIcon />
+                                        <SupervisedUserCircleIcon />
                                     ) : null}
                                 </ListItemIcon>
                                 <ListItemText primary={text} />
                             </ListItem>
                         </Link>
                     ))}
-
-
-
                 </List>
             </div>
         </Drawer>

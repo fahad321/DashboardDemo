@@ -19,9 +19,8 @@ import Search from '@material-ui/icons/Search'
 import ViewColumn from '@material-ui/icons/ViewColumn'
 import { render } from '@testing-library/react'
 import axios from 'axios'
-import ViewStreamIcon from '@material-ui/icons/ViewStream';
-import { Link } from 'react-router-dom';
-
+import ViewStreamIcon from '@material-ui/icons/ViewStream'
+import { Link } from 'react-router-dom'
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -51,13 +50,11 @@ const tableIcons = {
     ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
 }
 
-
 export default class DevicesPage extends Component {
     constructor(props) {
         super(props)
-        console.log(props);
-      
-           
+        console.log(props)
+
         this.state = {
             columns: [
                 { title: 'Id', field: 'id', type: 'numeric' },
@@ -76,19 +73,20 @@ export default class DevicesPage extends Component {
                 {
                     title: 'Other Actions',
                     filed: 'otherActions',
-                    render: (rowData) => (
-                        rowData ?
-                           (
-                        <Link to={{
-                            pathname: "/streams", deviceRow: rowData.url, deviceName : rowData.device
-                        }} >
-                           <ViewStreamIcon></ViewStreamIcon>
-                        </Link>
-                           ):
-                           (
+                    render: (rowData) =>
+                        rowData ? (
+                            <Link
+                                to={{
+                                    pathname: '/streams',
+                                    deviceRow: rowData.url,
+                                    deviceName: rowData.device,
+                                }}
+                            >
+                                <ViewStreamIcon></ViewStreamIcon>
+                            </Link>
+                        ) : (
                             <ViewStreamIcon></ViewStreamIcon>
-                           )
-                    ),
+                        ),
                 },
             ],
             data: [
@@ -111,7 +109,7 @@ export default class DevicesPage extends Component {
                     username: 'apo',
                     password: 34,
                     device: 'Cam8',
-                    url:'https://www.youtube.com/watch?v=f7hbWvHKns0',
+                    url: 'https://www.youtube.com/watch?v=f7hbWvHKns0',
                     location: 'lane2',
                 },
                 {
@@ -120,17 +118,14 @@ export default class DevicesPage extends Component {
                     port: 8080,
                     pathString: '/h264_ulaw.sdp',
                     device: 'Cam9',
-                    url:'https://www.youtube.com/watch?v=BHACKCNDMW8&t=396s',
+                    url: 'https://www.youtube.com/watch?v=BHACKCNDMW8&t=396s',
                     location: 'lane2',
                 },
             ],
-          
         }
     }
-   
 
     render() {
-        
         const handleClick = (event, rowData, togglePanel) => {
             // ensuring that button is pressed in table Row
             let address = `rtsp://${rowData.ip}:${rowData.port}${rowData.pathString}`
@@ -150,7 +145,7 @@ export default class DevicesPage extends Component {
             }
             console.log('here is none error')
         }
-        
+
         return (
             <MaterialTable
                 onRowClick={handleClick}

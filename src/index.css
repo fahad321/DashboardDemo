@@ -1,87 +1,83 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+        'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+        'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+        monospace;
 }
 
 #title {
-  text-align: Center;
-  font-family: arial, sans-serif;
-  background-color: #4CAF50;
+    text-align: Center;
+    font-family: arial, sans-serif;
+    background-color: #4caf50;
 }
 
-#students {
-  text-align: center;
-  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-  
-  border: 3px solid #ddd;
-  
-  float: right;
+#LogOut {
+    float: right;
 }
 
-#students td, #students th {
-  border: 1px solid #ddd;
-  padding: 25px;
-  
-  
+#students td,
+#students th {
+    border: 1px solid #ddd;
+    padding: 25px;
 }
 
-#students tr:nth-child(even){background-color: #f2f2f2;}
+#students tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
 
-#students tr:hover {background-color: #ddd;}
+#students tr:hover {
+    background-color: #ddd;
+}
 
 #students th {
-  text-align: center;
-  background-color: #4CAF50;
-  color: white;
-  }
+    text-align: center;
+    background-color: #4caf50;
+    color: white;
+}
 
-  .player-wrapper {
+.player-wrapper {
     position: relative;
-    padding-top: 56.25% /* Player ratio: 100 / (1280 / 720) */
-  }
-  
-  .react-player {
+    padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
+}
+
+.react-player {
     position: absolute;
     height: 120px !important;
     top: -4px;
     left: 0;
-    width: 170px!important;
-    
-  }
-  .Dropdown-control {
+    width: 170px !important;
+}
+.Dropdown-control {
     width: 70px !important;
-    }
-  .MuiTableContainer-root{
+}
+.MuiTableContainer-root {
     overflow: auto;
-  }
+}
 
-  .div {
+.div {
     display: inline-block !important;
     vertical-align: middle;
-  }
+}
 
-  .MuiButton-root {
+.MuiButton-root {
     text-transform: none !important;
-  }
-  
-  .info {
-    opacity: 0;
- }
- 
- .info:hover {
-     opacity: 1;
- }
- .MuiSvgIcon-fontSizeLarge{
+}
 
-  height:38px !important;
-  width:38px !important;
- }
+.info {
+    opacity: 0;
+}
+
+.info:hover {
+    opacity: 1;
+}
+.MuiSvgIcon-fontSizeLarge {
+    height: 38px !important;
+    width: 38px !important;
+}
