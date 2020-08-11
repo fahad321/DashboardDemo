@@ -17,11 +17,9 @@ import Remove from '@material-ui/icons/Remove'
 import SaveAlt from '@material-ui/icons/SaveAlt'
 import Search from '@material-ui/icons/Search'
 import ViewColumn from '@material-ui/icons/ViewColumn'
+import { Multiselect } from 'multiselect-react-dropdown';
 import { render } from '@testing-library/react'
 import axios from 'axios'
-import ViewStreamIcon from '@material-ui/icons/ViewStream';
-import { Link } from 'react-router-dom';
-
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -50,111 +48,63 @@ const tableIcons = {
     )),
     ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
 }
+const options= [{name: 'Model1', id: 1},{name: 'Model2', id: 2},{name: 'Model3', id: 3},{name: 'Model4', id: 4}]
 
-
-export default class DevicesPage extends Component {
+export default class ManageUsersPage extends Component {
     constructor(props) {
         super(props)
-        console.log(props);
-      
-           
         this.state = {
             columns: [
                 { title: 'Id', field: 'id', type: 'numeric' },
-                { title: 'IP', field: 'ip', type: 'string' },
-                { title: 'Port', field: 'port', type: 'numeric' },
-                { title: 'Path', field: 'pathString', type: 'string' },
-                { title: 'username', field: 'username', type: 'string' },
-                { title: 'Password', field: 'password', type: 'string' },
                 {
-                    title: 'Location',
-                    field: 'location',
-                    lookup: { lane1: 'lane1', lane2: 'lane2' },
-                },
-                { title: 'Device', field: 'device', type: 'string' },
-                { title: 'URL', field: 'url', type: 'url' },
-                {
-                    title: 'Other Actions',
-                    filed: 'otherActions',
+                    title: 'Avatar',
+                    filed: 'avatar',
                     render: (rowData) => (
-                        rowData ?
-                           (
-                        <Link to={{
-                            pathname: "/streams", deviceRow: rowData.url, deviceName : rowData.device
-                        }} >
-                           <ViewStreamIcon></ViewStreamIcon>
-                        </Link>
-                           ):
-                           (
-                            <ViewStreamIcon></ViewStreamIcon>
-                           )
+                        <div
+                            style={{
+                                fontSize: 100,
+                                textAlign: 'center',
+                                color: 'white',
+                                backgroundColor: '#E53935',
+                            }}
+                        ></div>
                     ),
                 },
+                { title: 'OrganizationName', field: 'organizationName', type: 'string' },
+                { title: 'Device', field: 'device', type: 'string' },
+                {
+                    title: 'Models',
+                    field: 'models',
+                    render: (rowData) => (
+                        <Multiselect
+options={options} // Options to display in the dropdown
+ // Function will trigger on select event
+displayValue="name" // Property name to display in the dropdown options
+/>
+                    ),
+                },
+                { title: 'userLogInId', field: 'userLogInId', type: 'string' },
+                { title: 'email', field: 'email', type: 'string' },
+                { title: 'Password', field: 'password', type: 'string' },
             ],
             data: [
                 {
                     id: 1,
-                    ip: '123.123.123.123',
-                    port: 1892,
-                    pathString: '',
-                    username: 'lunar',
-                    password: 63,
-                    device: 'Cam7',
-                    url: 'https://www.youtube.com/watch?v=7v6QXZWylpI',
-                    location: 'lane1',
-                },
-                {
-                    id: 2,
-                    ip: '123.123.123.129',
-                    port: 2220,
-                    pathString: '/live',
-                    username: 'apo',
-                    password: 34,
-                    device: 'Cam8',
-                    url:'https://www.youtube.com/watch?v=f7hbWvHKns0',
-                    location: 'lane2',
-                },
-                {
-                    id: 3,
-                    ip: '172.16.0.2',
-                    port: 8080,
-                    pathString: '/h264_ulaw.sdp',
-                    device: 'Cam9',
-                    url:'https://www.youtube.com/watch?v=BHACKCNDMW8&t=396s',
-                    location: 'lane2',
+                    organizationName: 'Kmart',
+                    device: 'CAM11',
+                    models: '3,4,5',
+                    userLogInId: 'lunarshankar102',
+                    email: 'shankar.demo@email.com',
+                    password: 'password',
                 },
             ],
-          
         }
     }
-   
 
     render() {
-        
-        const handleClick = (event, rowData, togglePanel) => {
-            // ensuring that button is pressed in table Row
-            let address = `rtsp://${rowData.ip}:${rowData.port}${rowData.pathString}`
-            if (event.target.tagName === 'BUTTON' || 'SPAN') {
-                console.log(
-                    event.target.tagName,
-                    address,
-                    process.env.REACT_APP_STREAM_DEVICE
-                )
-                axios
-                    .post(process.env.REACT_APP_STREAM_DEVICE, {
-                        address: address,
-                    })
-                    .then((e) => {
-                        console.log(e)
-                    })
-            }
-            console.log('here is none error')
-        }
-        
         return (
             <MaterialTable
-                onRowClick={handleClick}
-                title="All Devices"
+                title="Users"
                 columns={this.state.columns}
                 data={this.state.data}
                 icons={tableIcons}
