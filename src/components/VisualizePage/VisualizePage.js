@@ -15,7 +15,7 @@ import { connect } from 'react-redux'
 import { insertIntoItems } from '../../actions/library/insertIntoItems'
 import { insertIntoInFocusItem } from '../../actions/library/insertIntoInFocusItem'
 import { insertIntoFilteredItems } from '../../actions/library/insertIntoFilteredItems'
-import DChart from './DChart'
+import Bchart from './Bchart'
 
 const styles = (theme) => ({
     root: {
@@ -51,23 +51,23 @@ const styles = (theme) => ({
 class Body extends Component {
     constructor(props) {
         super(props)
-        
-        const abc = this.props.location.videoURL;
-        const cv= this.props.location.myModel;
+
+        const abc = this.props.location.videoURL
+        const cv = this.props.location.myModel
         this.state = {
             url: 'https://www.youtube.com/watch?v=B5i68EN-tmY',
             analyzing: true,
             device: 1,
             model: 3,
         }
-    if(this.props.location.videoURL !='' && this.props.location.videoURL !=null)
-    {
-        
-        //this.setState({url: abc});
-        this.state.url = this.props.location.videoURL;
-        this.state.model=this.props.location.myModel;
-        
-    }
+        if (
+            this.props.location.videoURL != '' &&
+            this.props.location.videoURL != null
+        ) {
+            //this.setState({url: abc});
+            this.state.url = this.props.location.videoURL
+            this.state.model = this.props.location.myModel
+        }
     }
 
     handleModelChange = (event) => {
@@ -173,8 +173,11 @@ class Body extends Component {
                         </Grid>
                     </Grid>
                     <Grid item xs>
-                        <DChart turnedOn={this.state.analyzing} />
+                        <Bchart />
                     </Grid>
+                </Grid>
+                <Grid container spacing={3}>
+                    {/* TODO */}
                 </Grid>
             </Paper>
         )
