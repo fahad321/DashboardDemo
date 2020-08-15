@@ -46,11 +46,7 @@ export default function Page() {
                     path="/Visualize"
                     component={VisualizePage}
                 ></Route>
-                <Route
-                    exact
-                    path="/analytics"
-                    component={AnalyticsPage}
-                ></Route>
+                <Route exact path="/analyze" component={AnalyticsPage}></Route>
                 <Route exact path="/models" component={ModelsPage}></Route>
                 <Route exact path="/library" component={LibraryPage}></Route>
                 <Route exact path="/devices" component={DevicesPage}></Route>
@@ -64,7 +60,7 @@ export default function Page() {
                     exact
                     path="/manageorganizations"
                     component={ManageOrganizationsPage}
-                ></Route>                
+                ></Route>
             </Switch>
         </main>
     )
